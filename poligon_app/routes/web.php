@@ -26,7 +26,7 @@ Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function() {
 
 //Route::resource('rest', 'RestTestController')->names('restTest');
 
-Route::group(['namespace' => 'Blog\Admin', 'prefix' => 'category'], function() {
+Route::group(['namespace' => 'Blog\Admin', 'prefix' => 'admin/blog'], function() {
     $methods = ['index', 'update', 'edit', 'store', 'create'];
     Route::resource('categories', 'CategoryController')
             ->only($methods)
