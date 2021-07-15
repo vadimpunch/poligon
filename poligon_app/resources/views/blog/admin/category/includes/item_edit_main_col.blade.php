@@ -23,7 +23,7 @@
                                    id="title"
                                    value="{{$item->title}}"
                                    class="form-control"
-                                   maxlength="3"
+                                   minlength="3"
                                    required
                             >
                         </div>
