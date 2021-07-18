@@ -14,7 +14,8 @@ class BlogCategoryRepository extends CoreRepository
     /**
      * @return mixed|string
      */
-    protected function getModelClass() {
+    protected function getModelClass()
+    {
         return Model::class;
     }
 
@@ -23,7 +24,8 @@ class BlogCategoryRepository extends CoreRepository
      * @param int $id
      * @return mixed
      */
-    public function getEdit($id) {
+    public function getEdit($id)
+    {
         return $this->startConditions()->find($id);
 
     }
@@ -32,8 +34,29 @@ class BlogCategoryRepository extends CoreRepository
      * Получить категории для вывода в селекте
      * @return \Illuminate\Contracts\Foundation\Application[]|Collection|\Illuminate\Database\Eloquent\Model[]|mixed[]
      */
-    public function getForComboBox() {
-        return $this->startConditions()->all();
+    public function getForComboBox()
+    {
+//        return $this->startConditions()->all();
+        $columns = implode(',', [
+            'id',
+            'CONCAT(id, ". ", title) as id_title',
+        ]);
+        $result = $this->startConditions()
+            ->selectRaw($columns)
+            ->toBase()
+            ->get();
+        return $result;
+    }
+
+    public function getAllWithPaginate($perPage = null)
+    {
+        $fields = ['id', 'title', 'parent_id'];
+        $result = $this
+            ->startConditions()
+            ->select($fields)
+            ->paginate($perPage);
+
+        return $result;
     }
 
 

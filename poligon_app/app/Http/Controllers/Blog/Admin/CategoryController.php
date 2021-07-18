@@ -10,6 +10,16 @@ use Illuminate\Http\Request;
 
 class CategoryController extends BaseController
 {
+    protected $repository;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->repository = app(BlogCategoryRepository::class);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +27,8 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-      $paginator = BlogCategory::paginate(5);
+//      $paginator = BlogCategory::paginate(5);
+        $paginator = $this->repository->getAllWithPaginate(15);
       return view('blog.admin.category.index', compact('paginator'));
     }
 
@@ -29,7 +40,7 @@ class CategoryController extends BaseController
     public function create()
     {
         $item = new BlogCategory();
-        $categoryList = BlogCategory::all();
+        $categoryList = $this->repository->getForComboBox();
 
         return view('blog.admin.category.edit', compact('item', 'categoryList'));
     }
@@ -65,12 +76,12 @@ class CategoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,  BlogCategoryRepository $categoryRepository)
+    public function edit($id)
     {
 //        $item = BlogCategory::findOrFail($id)
 //        $categoryList = BlogCategory::all();
-        $item = $categoryRepository->getEdit($id);
-        $categoryList = $categoryRepository->getForComboBox();
+        $item = $this->repository->getEdit($id);
+        $categoryList = $this->repository->getForComboBox();
         if(empty($item)) {
             abort(404);
         }
@@ -89,7 +100,7 @@ class CategoryController extends BaseController
      */
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
-        $item = BlogCategory::find($id);
+        $item = $this->repository->getEdit($id);
         if(empty($item)) {
             return back()
                 ->withErrors(['msg' => "Запись с id = {$id} не найдена"])
