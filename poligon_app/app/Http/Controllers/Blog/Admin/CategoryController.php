@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Admin;
 use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
+use App\Repositories\BlogCategoryRepository;
 use Illuminate\Http\Request;
 
 class CategoryController extends BaseController
@@ -64,10 +65,17 @@ class CategoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,  BlogCategoryRepository $categoryRepository)
     {
-        $item = BlogCategory::findOrFail($id);
-        $categoryList = BlogCategory::all();
+//        $item = BlogCategory::findOrFail($id)
+//        $categoryList = BlogCategory::all();
+        $item = $categoryRepository->getEdit($id);
+        $categoryList = $categoryRepository->getForComboBox();
+        if(empty($item)) {
+            abort(404);
+        }
+
+
 
         return view('blog.admin.category.edit', compact('item', 'categoryList'));
     }
@@ -93,7 +101,7 @@ class CategoryController extends BaseController
             $data['slug'] = str_slug($data['title']);
         }
 
-        $result = $item->fill($data)->save();
+        $result = $item->update();
         if($result) {
              return redirect()->route('blog.admin.categories.edit', $item->id)
                     ->with(['success' => 'Успешно сохранено']);
