@@ -50,5 +50,9 @@ class BlogPostRepository extends CoreRepository
         return $result;
     }
 
+    public function getEdit($id) {
+        return $this->startConditions()->find($id);
+    }
+
 
 }
