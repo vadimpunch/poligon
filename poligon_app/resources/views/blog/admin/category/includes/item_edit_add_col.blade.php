@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Удалено</label>
-                        <input type="text" class="form-control" disabled value="{{$item->delited_at}}">
+                        <input type="text" class="form-control" disabled value="{{$item->deleted_at}}">
                     </div>
                 </div>
             </div>

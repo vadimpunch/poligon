@@ -62,8 +62,9 @@
                                     required
                             >
                                 @foreach($categoryList as $categoryOption)
-                                    <option value="{{$categoryOption->id}}">
-                                        @if($categoryOption->id == $item->category_id) selected @endif
+                                    <option value="{{$categoryOption->id}}"
+                                         @if($categoryOption->id == $item->category_id) selected @endif
+                                    >
                                         {{$categoryOption->id_title}}
                                     </option>
                                 @endforeach
@@ -101,7 +102,7 @@
                                    type="checkbox"
                                    class="form-check-input"
                                    name="is_published"
-                                   value="{{$item->is_published}}"
+                                   value="1"
                                     @if($item->is_published)
                                         checked="checked"
                                     @endif
