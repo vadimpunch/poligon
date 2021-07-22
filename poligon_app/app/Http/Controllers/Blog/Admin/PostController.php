@@ -112,13 +112,6 @@ class PostController extends BaseController
         }
         $data = $request->all();
 
-        if (!$data['slug']) {
-            $data['slug'] = \Str::slug($data['title']);
-        }
-        if(!$item->published_at && $data['is_published']) {
-            $data['published_at'] = Carbon::now();
-        }
-
         $result = $item->update($data);
 
         if($result) {
