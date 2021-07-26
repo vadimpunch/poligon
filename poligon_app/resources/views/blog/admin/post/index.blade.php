@@ -21,7 +21,7 @@
                             <tbody>
                             @foreach($paginator as $item)
                                 @php /** @var  \App\Models\BlogPost $item */ @endphp
-                                <tr @if( !$item->is_published) style="backgroud-color: #ccc;"@endif>
+                                <tr @if( !$item->is_published) style="background-color: #ccc;"@endif>
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->user->name}}</td>
                                     <td>{{$item->category->title}}</td>

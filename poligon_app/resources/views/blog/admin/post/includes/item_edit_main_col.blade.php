@@ -52,14 +52,14 @@
 
                     <div class="tab-pane" id="adddata" role="tabpanel">
                         <div class="form-group">
-                            <label for="parent_id">Категория</label>
+                            <label for="category_id">Категория</label>
                             <select
 
                                     id="category_id"
                                     name="category_id"
                                     class="form-control"
                                     placeholder="Выберите категорию"
-                                    required
+
                             >
                                 @foreach($categoryList as $categoryOption)
                                     <option value="{{$categoryOption->id}}"

@@ -8,7 +8,7 @@
         <form method='POST' action="{{route('blog.admin.post.update', $item->id)}}">
             @method('PATCH')
     @else
-        <form method='POST' action="{{route('blog.admin.categories.store')}}">
+        <form method='POST' action="{{route('blog.admin.post.store')}}">
     @endif
             @csrf
                         <div class="row justify-content-center">
