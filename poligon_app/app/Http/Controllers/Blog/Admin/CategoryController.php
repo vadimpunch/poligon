@@ -57,7 +57,10 @@ class CategoryController extends BaseController
         $data = $request->input();
 
         $item = new BlogCategory($data);
+
+
         $item->save();
+            dd($item);
 
         if($item->exists) {
             return redirect()->route('blog.admin.category.edit', $item->id)
@@ -109,7 +112,9 @@ class CategoryController extends BaseController
             $data['slug'] = str_slug($data['title']);
         }
 
-        $result = $item->update();
+        $result = $item->update($data);
+
+
         if($result) {
              return redirect()->route('blog.admin.categories.edit', $item->id)
                     ->with(['success' => 'Успешно сохранено']);

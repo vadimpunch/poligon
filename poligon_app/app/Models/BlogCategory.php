@@ -34,4 +34,12 @@ class BlogCategory extends Model
         return $this->id === BlogCategory::ROOT;
     }
 
+    public function getTitleAttribute($value) {
+        return strtoupper($value);
+    }
+
+    public function setTitleAttribute($value) {
+        $this->attributes['title'] = strtolower($value);
+    }
+
 }
