@@ -22,6 +22,9 @@
                     <span aria-hidden="true">x</span>
                 </button>
                 {{session()->get('success')}}
+                @if(session('restore_id'))
+                    <a href="{{route('blog.admin.post.restore', session('restore_id'))}}">Восстановить</a>
+                @endif
             </div>
         </div>
     </div>

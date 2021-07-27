@@ -35,4 +35,6 @@ Route::group(['namespace' => 'Blog\Admin', 'prefix' => 'admin/blog'], function()
     Route::resource('posts', 'PostController')
         ->except('show')
         ->names('blog.admin.post');
+
+    Route::get('/posts/{post}/restore', 'PostController@restore')->name('blog.admin.post.restore');
 });

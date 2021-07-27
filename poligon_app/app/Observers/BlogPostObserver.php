@@ -59,6 +59,17 @@ class BlogPostObserver
      * @param  \App\Models\BlogPost  $blogPost
      * @return void
      */
+    public function deleting(BlogPost $blogPost)
+    {
+//       return false;
+    }
+
+    /**
+     * Handle the blog post "deleted" event.
+     *
+     * @param  \App\Models\BlogPost  $blogPost
+     * @return void
+     */
     public function deleted(BlogPost $blogPost)
     {
         //

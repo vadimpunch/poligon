@@ -100,6 +100,7 @@ class PostController extends BaseController
     public function edit($id)
     {
        $item = $this->repository->getEdit($id);
+
        if(!$item) {
            abort(404);
        }
@@ -148,6 +149,29 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        //
+
+        $result = BlogPost::destroy($id);
+
+        if($result) {
+            return redirect()
+                ->route('blog.admin.post.index', $id)
+                ->with(['success' => "Запись {$id} успешно удалена", 'restore_id' => $id]);
+        } else {
+            return back()
+                ->withErrors(['msg' => "Ошибка удаления"]);
+        }
+    }
+
+    public function restore($id) {
+        $item = BlogPost::onlyTrashed()->find($id);
+        $result= $item->restore();
+        if($result) {
+            return redirect()
+                ->route('blog.admin.post.edit', $id)
+                ->with(['success' => "Запись {$id} успешно восстановлена"]);
+        } else {
+            return back()
+                ->withErrors(['msg' => "Ошибка восстановления"]);
+        }
     }
 }

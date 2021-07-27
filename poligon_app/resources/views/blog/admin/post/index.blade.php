@@ -3,6 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                @include('blog.admin.post.includes.result_messages')
                 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                     <a href="{{route('blog.admin.post.create')}}" class="btn btn-primary">Создать</a>
                 </nav>
