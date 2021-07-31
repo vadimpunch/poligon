@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,7 +21,7 @@ Route::get('/', function () {
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function() {
    Route::resource('posts', 'PostController')->names('blog.posts');
